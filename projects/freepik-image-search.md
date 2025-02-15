@@ -46,6 +46,7 @@ Freepik API를 활용하여 **이미지를 검색하고, 다운로드하여 AWS 
 ## 🔍 시스템 아키텍처
 ```plaintext
 사용자 → Freepik API 검색 → Node.js 서버 → 이미지 다운로드 → AWS S3 저장 → URL 반환
+```
 
 ## ⚡ 성능 개선 사항
 
@@ -108,6 +109,7 @@ function searchFreePik(wsName, term, page, filters) {
         console.log(status, err, res);
     })
 }
+```
 ➡ **개선 포인트:**
 - API 호출 최적화 (불필요한 요청 최소화)
 - `async: false` 옵션 제거 가능성 검토
@@ -138,6 +140,7 @@ function processFreePikImage(id, user) {
         showCommonLoadingView(false); // 로딩 UI 제거
     })
 }
+```
 
 ➡ **개선 포인트:**
 - **로딩 UI 추가** → 다운로드 중 사용자 피드백 제공  
