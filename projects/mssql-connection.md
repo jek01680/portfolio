@@ -1,155 +1,98 @@
-# MSSQL 연동 기능 개발 (Flextudio)
+# MSSQL 연동 기능 추가 (Flextudio)
 
 🔥 **기간**: 2023/03/10 → 2023/03/17  
-🛠 **기술 스택**: Node.js, DynamoDB, MSSQL, JavaScript  
+🛠 **기술 스택**: Node.js, MSSQL, MySQL, DynamoDB, JavaScript  
 🏢 **회사**: Flextudio  
 
 ---
 
 ## 📝 프로젝트 개요
-MSSQL과의 연동을 통해 **사용자가 DB 정보를 입력받아 저장하고, 해당 정보를 바탕으로 데이터베이스와 상호작용할 수 있도록 하는 기능**을 개발했습니다.  
+Flextudio의 기존 DB 연결 기능은 **MySQL만 지원**했지만, 기업 고객 중 **MSSQL을 사용하는 사례가 많아** 이를 지원할 필요가 있었습니다.  
+**B2B 고객을 타겟팅**하여 MSSQL 연결 기능을 추가하고, UI 및 백엔드 로직을 개선하는 작업을 수행했습니다.  
 
 ✅ **기여한 부분**  
-- **DB 정보 입력 화면 개발**: 사용자에게 DB 정보를 입력받고 저장  
-- **MSSQL 연동**: 입력된 정보를 바탕으로 MSSQL과 상호작용  
-- **DynamoDB 저장 및 관리**: DB 정보를 DynamoDB 테이블에 저장 및 삭제 기능 추가  
-- **MSSQL 쿼리 실행 기능 추가**: 사용자가 SQL을 직접 실행할 수 있도록 구현  
+- **DB 연결 옵션 확장** → 기존 MySQL만 지원하던 기능을 MSSQL까지 확장  
+- **MSSQL 연결을 위한 백엔드 로직 추가** → `mssql` 패키지를 활용한 연결 구현  
+- **DB 타입 선택 UI 개선** → MySQL / MSSQL을 선택하면 동적으로 입력 필드 변경  
+- **DynamoDB 저장 방식 개선** → 각 DB 연결 정보를 안전하게 저장 및 삭제 가능  
 
 ---
 
 ## 🚀 주요 기능
 
-### ✅ 1. DB 정보 입력
-- **사용자가 DB 정보를 입력하는 UI 개발**  
-- **입력된 정보가 DynamoDB에 저장되도록 연동**  
-- **DB 타입(MySQL, MSSQL 등)에 따라 입력 필드가 동적으로 변경됨**  
+### ✅ 1. MySQL & MSSQL 선택 UI 추가
+- 사용자가 **DB 연결 유형(MySQL, MSSQL)을 선택할 수 있도록 UI 추가**
+- 선택된 DB 유형에 따라 **입력 필드가 자동 변경**되도록 구현
 
-### ✅ 2. DB 정보 저장
-- **입력받은 DB 정보를 DynamoDB `_fFlexSQLTenant` 테이블에 저장**  
-- **기존에 저장된 DB 정보가 있으면 덮어쓰기 가능**  
+### ✅ 2. MSSQL 연결 기능 추가
+- MSSQL 연결을 위한 **Node.js `mssql` 패키지 활용**
+- MySQL과 MSSQL의 **커넥션 방식 차이를 고려하여 로직 분리**
+- MSSQL의 인증 방식 (SQL Server 인증 vs. Windows 인증) 고려하여 **SQL Server 인증 방식 적용**
 
-### ✅ 3. DB 정보 삭제
-- **사용자에게 확인 메시지를 표시한 후 DynamoDB에서 삭제**  
-- **삭제 완료 후 초기 화면으로 리다이렉트**  
+### ✅ 3. DB 정보 저장 및 삭제 기능
+- DynamoDB에 **DB 연결 정보(MySQL, MSSQL) 저장**
+- 필요 시 DB 정보를 안전하게 삭제할 수 있도록 구현  
 
-### ✅ 4. MSSQL 쿼리 실행
-- **MSSQL에 직접 SQL 쿼리를 실행하고 결과를 반환**  
-- **실행된 쿼리는 `_fFlexSQLService` 테이블의 `fScript_mssql` 필드에 저장**  
+### ✅ 4. MSSQL 쿼리 실행 기능 추가
+- MySQL뿐만 아니라 **MSSQL에서도 SQL을 실행할 수 있도록 기능 추가**  
+- 실행된 쿼리는 `_fFlexSQLService` 테이블의 `fScript_mssql` 필드에 저장됨  
 
 ---
 
 ## 🛠 사용 기술
 | 기술 | 설명 |
 |------|------|
-| **Node.js** | 백엔드 API 개발 |
+| **Node.js (Express.js)** | API 개발 |
 | **MSSQL** | 데이터 저장 및 조회 |
-| **DynamoDB** | 사용자 DB 정보 저장 |
-| **JavaScript (Express.js)** | 서버 개발 |
-| **SQL (MSSQL 쿼리 실행)** | 직접 SQL 실행 가능 |
+| **MySQL** | 기존 지원 DB |
+| **DynamoDB** | DB 연결 정보 저장 |
+| **JavaScript (React UI)** | 프론트엔드 개발 |
+| **SQL (`mssql` 패키지)** | MSSQL 연결 및 쿼리 실행 |
 
 ---
 
 ## 🔍 시스템 아키텍처
 ```plaintext
-사용자 → DB 정보 입력 → DynamoDB 저장 → MSSQL 연동 → SQL 실행 및 응답 반환
+사용자 → DB 연결 선택 (MySQL / MSSQL) → DynamoDB 저장 → MSSQL 연동 → SQL 실행 가능
 ```
 
 ---
 
-## ⚡ 성능 개선 사항
-1️⃣ **DB 연결 속도 최적화**  
-   - 기존 DB 연결 프로세스를 개선하여 **연결 속도 단축**  
-   - **MSSQL 연결 최적화**를 통해 불필요한 요청 감소  
+## 📌 B2B 타겟 고객을 위한 확장
+### **🔹 기존 고객의 Pain Point 해결**
+- 기존 서비스는 **MySQL만 지원**하여 **MSSQL을 사용하는 기업 고객**이 서비스를 활용할 수 없었음
+- **MSSQL 지원을 추가하면서, 더 많은 기업 고객이 서비스에 유입될 수 있도록 개선**
 
-2️⃣ **DynamoDB 저장 구조 개선**  
-   - 기존보다 더 빠르게 저장 및 조회 가능하도록 테이블 구조 최적화  
+### **🔹 기업 고객을 고려한 확장성**
+- 대기업 및 금융권에서는 MSSQL을 많이 사용하므로, **B2B SaaS 타겟팅을 확장**하는 효과  
+- 앞으로 **PostgreSQL, Oracle 등 추가적인 DB 연결 기능을 고려할 수 있는 기반을 마련**  
 
 ---
 
 ## 📸 프로젝트 UI 화면
-🔗 **[DB 정보 입력 화면](https://github.com/jek01680/portfolio/issues/5)**  
+🔗 **[DB 연결 UI 개선](https://github.com/jek01680/portfolio/issues/5)**  
 🔗 **[DB 정보 저장 및 삭제 화면](https://github.com/jek01680/portfolio/issues/6)**  
 🔗 **[MSSQL 쿼리 실행 화면](https://github.com/jek01680/portfolio/issues/7)**  
 
-➡ **GitHub Issues를 통해 프로젝트 UI 화면을 확인할 수 있습니다.**  
-
 ---
 
-## 🔍 개선된 코드 샘플
+## 🔍 코드 샘플
 
-### **🔹 DB 정보 입력 및 저장**
+### **🔹 MSSQL 연결 설정**
 ```javascript
-// DB 정보 입력 폼 처리 및 저장 로직
-router.post('/saveDBInfo', async (req, res) => {
-    const { dbType, dbName, hostname, port, username, password, adminUsername, adminPassword } = req.body;
-
-    const params = {
-        TableName: '_fFlexSQLTenant',
-        Item: {
-            fBaseCompanyID: req.session.companyID,
-            fDBKey: `${dbType}#${dbName}`,
-            fDBType: dbType,
-            fDBName: dbName,
-            hostname: hostname,
-            port: port,
-            username: username,
-            password: password,
-            adminUsername: adminUsername,
-            adminPassword: adminPassword
-        }
-    };
-
-    try {
-        await docClient.put(params).promise();
-        res.send({ result: 'Success' });
-    } catch (err) {
-        res.status(500).send({ result: 'Failed', error: err });
-    }
-});
-```
-
----
-
-### **🔹 DB 정보 삭제**
-```javascript
-// 특정 DB 정보를 DynamoDB에서 삭제하는 코드
-router.post('/deleteDBInfo', async (req, res) => {
-    const { dbKey } = req.body;
-    const params = {
-        TableName: '_fFlexSQLTenant',
-        Key: {
-            fBaseCompanyID: req.session.companyID,
-            fDBKey: dbKey
-        }
-    };
-
-    try {
-        await docClient.delete(params).promise();
-        res.send({ result: 'Success' });
-    } catch (err) {
-        res.status(500).send({ result: 'Failed', error: err });
-    }
-});
-```
-
----
-
-### **🔹 MSSQL 쿼리 실행**
-```javascript
-// MSSQL 쿼리를 실행하고 결과를 반환하는 함수
 const sql = require('mssql');
 
-async function executeMSSQLQuery(query, dbConfig) {
+async function connectMSSQL(dbConfig) {
     try {
         const pool = await sql.connect(dbConfig);
-        const result = await pool.request().query(query);
-        return result.recordset;
+        console.log('✅ MSSQL 연결 성공');
+        return pool;
     } catch (err) {
-        throw new Error(`MSSQL Query Execution Failed: ${err.message}`);
+        console.error('❌ MSSQL 연결 실패:', err);
+        throw err;
     }
 }
 
-// DB 연결 설정 예시
 const dbConfig = {
     user: 'username',
     password: 'password',
@@ -157,15 +100,14 @@ const dbConfig = {
     database: 'dbName',
     port: 1433,
     options: {
-        encrypt: true, // Use encryption
-        enableArithAbort: true // Enable arith abort
+        encrypt: true,
+        enableArithAbort: true
     }
 };
 
-// 쿼리 실행 예시
-const query = 'SELECT * FROM TableName';
-executeMSSQLQuery(query, dbConfig).then(result => {
-    console.log(result);
+// 연결 테스트
+connectMSSQL(dbConfig).then(pool => {
+    console.log('DB 연결 성공');
 }).catch(err => {
     console.error(err);
 });
@@ -173,15 +115,37 @@ executeMSSQLQuery(query, dbConfig).then(result => {
 
 ---
 
+### **🔹 MySQL & MSSQL 선택 UI 구현**
+```javascript
+function updateDBFields(selectedDBType) {
+    const mssqlFields = document.getElementById('mssql-fields');
+    const mysqlFields = document.getElementById('mysql-fields');
+
+    if (selectedDBType === 'MSSQL') {
+        mssqlFields.style.display = 'block';
+        mysqlFields.style.display = 'none';
+    } else {
+        mssqlFields.style.display = 'none';
+        mysqlFields.style.display = 'block';
+    }
+}
+
+document.getElementById('dbTypeSelect').addEventListener('change', (event) => {
+    updateDBFields(event.target.value);
+});
+```
+
+---
+
 ## 🚀 배운 점 & 개선할 점
 ✅ **배운 점**:
-- **MSSQL과 Node.js 연동 경험**  
-- **DynamoDB를 활용한 데이터 저장 및 삭제 로직 구현**  
-- **실제 SQL 실행 환경 구축 경험**  
+- **MSSQL과 MySQL의 차이점 이해**  
+- **Node.js에서 `mssql` 패키지를 활용하여 데이터베이스 연동하는 방법 학습**  
+- **B2B SaaS에서 다양한 DB 지원이 중요한 이유를 경험**  
 
 🔧 **개선할 점**:
-- **DB 연결 속도 추가 최적화 가능**  
-- **쿼리 실행 중 발생할 수 있는 오류 처리 로직 추가 필요**  
-- **사용자 친화적인 UI 개선 가능**  
+- **향후 PostgreSQL, Oracle 같은 추가적인 DB 지원 기능 고려 가능**  
+- **UI에서 DB 연결 정보를 더 직관적으로 입력할 수 있도록 개선 가능**  
+- **DB 연결 실패 시, 더 친절한 오류 메시지를 제공하는 기능 추가 가능**  
 
 ---
