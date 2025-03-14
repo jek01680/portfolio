@@ -76,16 +76,16 @@ Freepik API를 활용하여 **이미지를 검색하고, 다운로드하여 AWS 
 
 ➡ **특정 요청에서는 다운로드 속도가 50% 이상 단축되었으며, 전반적인 API 응답 속도도 향상됨**  
 
-![네트워크 화면](https://private-user-images.githubusercontent.com/49742311/413525757-faef1df3-609b-4cd3-acf5-a854bcb69c8c.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mzk2MDc2OTYsIm5iZiI6MTczOTYwNzM5NiwicGF0aCI6Ii80OTc0MjMxMS80MTM1MjU3NTctZmFlZjFkZjMtNjA5Yi00Y2QzLWFjZjUtYTg1NGJjYjY5YzhjLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAyMTUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMjE1VDA4MTYzNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWIwYWY2MzU5NmQ0N2Y4ZGRjZWRkNjI1YzQyOTBlMjlkZTM1ZDZlZmIxODA3ZDFlODBlOTJlZWE0ZmEwMjNiNTAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Gsp8KGFm3re1gLFQXFKzPt-9lr8Jd0WQnHt_ZZOMEzs)
-![네트워크 화면](https://private-user-images.githubusercontent.com/49742311/413525758-379c876a-b58b-478f-9d5b-8ed2e7e4b5e7.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mzk2MDc2OTYsIm5iZiI6MTczOTYwNzM5NiwicGF0aCI6Ii80OTc0MjMxMS80MTM1MjU3NTgtMzc5Yzg3NmEtYjU4Yi00NzhmLTlkNWItOGVkMmU3ZTRiNWU3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAyMTUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMjE1VDA4MTYzNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTFlZmYwMmQ2YTRhMTk4ZDc1YWFhNGFiMmEwYTQxY2YzMmYyMzZjNzM2MWYyMTI3NTgwZDU3YzExYTBhYzZkMzYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.AZFhj_kTih6DGUQrMNDzk_zHR7s3oufNe9Pf4l9bERw)
+![네트워크 화면](./images/network.png)
 
+![네트워크 화면](./images/network2.png)
 
 ---
 
 ## 📸 프로젝트 UI 화면
-![검색 화면](https://github.com/jek01680/portfolio/issues/1#issue-2855311994)
+![검색 화면](./images/freepik_image.png)
 
-![적용 화면](https://github.com/jek01680/portfolio/issues/2#issue-2855316871)
+![적용 화면](./images/freepik_image2.gif)
 
 ---
 

@@ -96,8 +96,9 @@
 ---
 
 ## 📸 **4. 프로젝트 UI**
-![커뮤니티 UI](https://github.com/jek01680/portfolio/issues/7#issue-2855333012)
+![커뮤니티 UI](./images/community.png)
 
+![커뮤니티 UI](./images/community2.png)
 ---
 
 ## 🔍 **5. 배운 점 & 성과**
